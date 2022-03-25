@@ -1,10 +1,29 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {FlatList, SafeAreaView, View, Text} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ProductItem from '../../components/shop/ProductItem';
+import * as cartActions from '../../store/actions/cartActions';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../../components/touchables/HeaderButton';
 
 const ProductsOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="cart"
+            iconName="cart"
+            iconSize={30}
+            onPress={() => props.navigation.navigate('CartScreen')}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [props.navigation]);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -21,7 +40,7 @@ const ProductsOverviewScreen = props => {
                 productTitle: itemData.item.title,
               });
             }}
-            onAddToCart={() => console.log('ADD TO CART')}
+            onAddToCart={() => dispatch(cartActions.addToCart(itemData.item))}
           />
         )}
         keyExtractor={item => item.id}

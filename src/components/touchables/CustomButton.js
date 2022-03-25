@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import Fonts from '../../constants/Fonts';
 
 const CustomButton = props => {
   let TouchableComponent = TouchableOpacity;
@@ -16,9 +17,15 @@ const CustomButton = props => {
   }
   return (
     <View style={{...styles.container, ...props.style}}>
-      <TouchableComponent useForeground onPress={props.onPress}>
+      <TouchableComponent
+        useForeground
+        onPress={props.onPress}
+        accesible={props.accesible}
+        disabled={props.disabled}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{props.title.toUpperCase()}</Text>
+          <Text style={{...styles.title, ...props.titleStyle}}>
+            {props.title.toUpperCase()}
+          </Text>
         </View>
       </TouchableComponent>
     </View>
@@ -46,6 +53,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     color: 'white',
+    fontFamily: Fonts.bold,
   },
 });
 

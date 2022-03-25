@@ -12,6 +12,7 @@ import {
   Platform,
 } from 'react-native';
 import Colors from '../../constants/Colors';
+import Fonts from '../../constants/Fonts';
 import CustomButton from '../touchables/CustomButton';
 
 const ProductItem = props => {
@@ -39,7 +40,7 @@ const ProductItem = props => {
             />
             <CustomButton
               style={styles.addToCartButton}
-              title="+ To Cart"
+              title="Add To Cart"
               onPress={props.onAddToCart}
             />
           </View>
@@ -80,10 +81,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    fontFamily: Fonts.bold,
   },
   price: {
     fontSize: 14,
     color: '#888',
+    fontFamily: Fonts.regular,
   },
   actions: {
     flexDirection: 'row',
