@@ -1,12 +1,15 @@
 import React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/shop/CartItem';
 import CustomButton from '../../components/touchables/CustomButton';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
+import * as cartActions from '../../store/actions/cartActions';
 
 const CartScreen = props => {
+  const dispatch = useDispatch();
+
   const cartTotal = useSelector(state => {
     return state.cart.total;
   });
@@ -55,7 +58,9 @@ const CartScreen = props => {
                 quantity={itemData.item.quantity}
                 title={itemData.item.productTitle}
                 amount={itemData.item.total}
-                onRemove={() => console.log('REMOVE ITEM')}
+                onRemove={() =>
+                  dispatch(cartActions.removeFromCart(itemData.item.productId))
+                }
               />
             )}
           />
