@@ -1,11 +1,12 @@
-import {NavigationContainer} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
-import {ScrollView, View, Text, Image, Button, StyleSheet} from 'react-native';
+import {ScrollView, Text, Image, Button, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../components/touchables/CustomButton';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 import * as cartActions from '../../store/actions/cartActions';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../../components/touchables/HeaderButton';
 
 const ProductDetailScreen = props => {
   const {productId, productTitle} = props.route.params;
@@ -13,6 +14,16 @@ const ProductDetailScreen = props => {
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="cart"
+            iconName="cart"
+            iconSize={30}
+            onPress={() => props.navigation.navigate('CartScreen')}
+          />
+        </HeaderButtons>
+      ),
       title: productTitle,
     });
   }, [props.navigation, productTitle]);

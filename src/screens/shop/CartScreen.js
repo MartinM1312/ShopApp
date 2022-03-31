@@ -6,6 +6,7 @@ import CustomButton from '../../components/touchables/CustomButton';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 import * as cartActions from '../../store/actions/cartActions';
+import * as orderActions from '../../store/actions/orderActions';
 
 const CartScreen = props => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const CartScreen = props => {
           titleStyle={{color: 'dodgerblue'}}
           disabled={cartItems.length === 0}
           accesible={cartItems.length === 0}
+          onPress={() => dispatch(orderActions.addOrder(cartItems, cartTotal))}
         />
       </View>
       <View style={styles.cartItems}>
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   },
   horizontalLine: {
     width: '100%',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderTopColor: 'lightgray',
     marginVertical: 5,
   },

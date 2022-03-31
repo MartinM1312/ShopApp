@@ -5,6 +5,7 @@ import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cartActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../../components/touchables/HeaderButton';
+import {container} from '../../constants/Styles';
 
 const ProductsOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
@@ -22,11 +23,21 @@ const ProductsOverviewScreen = props => {
           />
         </HeaderButtons>
       ),
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="menu"
+            iconName="menu"
+            iconSize={30}
+            onPress={() => props.navigation.toggleDrawer()}
+          />
+        </HeaderButtons>
+      ),
     });
   }, [props.navigation]);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={container}>
       <FlatList
         data={products}
         renderItem={itemData => (
