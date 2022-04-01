@@ -1,5 +1,12 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import {View, StyleSheet, Text, SafeAreaView, FlatList} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  FlatList,
+  StatusBar,
+} from 'react-native';
 import {useDrawerStatus} from '@react-navigation/drawer';
 import {useSelector} from 'react-redux';
 import {container} from '../../constants/Styles';
@@ -24,22 +31,22 @@ const OrderScreen = props => {
           />
         </HeaderButtons>
       ),
-      //   headerRight: () => (
-      //     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-      //       <Item
-      //         title="Cart"
-      //         iconName="cart"
-      //         iconSize={30}
-      //         onPress={() => props.navigation.navigate('CartScreen')}
-      //       />
-      //     </HeaderButtons>
-      //   ),
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Cart"
+            iconName="cart"
+            iconSize={30}
+            onPress={() => props.navigation.navigate('CartScreen')}
+          />
+        </HeaderButtons>
+      ),
     });
   }, [props.navigation]);
 
-  useEffect(() => {
-    props.navigation.closeDrawer();
-  }, []);
+  //   useEffect(() => {
+  //     props.navigation.closeDrawer();
+  //   }, []);
 
   return (
     <SafeAreaView style={container}>

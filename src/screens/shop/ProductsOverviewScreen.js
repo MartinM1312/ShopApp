@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {FlatList, SafeAreaView, View, Text} from 'react-native';
+import {FlatList, SafeAreaView, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cartActions';

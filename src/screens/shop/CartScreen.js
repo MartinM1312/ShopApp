@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  StatusBar,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/shop/CartItem';
 import CustomButton from '../../components/touchables/CustomButton';
@@ -42,7 +49,10 @@ const CartScreen = props => {
           titleStyle={{color: 'dodgerblue'}}
           disabled={cartItems.length === 0}
           accesible={cartItems.length === 0}
-          onPress={() => dispatch(orderActions.addOrder(cartItems, cartTotal))}
+          onPress={() => {
+            dispatch(orderActions.addOrder(cartItems, cartTotal));
+            props.navigation.navigate('OrderScreen');
+          }}
         />
       </View>
       <View style={styles.cartItems}>
@@ -60,9 +70,9 @@ const CartScreen = props => {
                 quantity={itemData.item.quantity}
                 title={itemData.item.productTitle}
                 amount={itemData.item.total}
-                onRemove={() =>
-                  dispatch(cartActions.removeFromCart(itemData.item.productId))
-                }
+                onRemove={() => {
+                  dispatch(cartActions.removeFromCart(itemData.item.productId));
+                }}
               />
             )}
           />
